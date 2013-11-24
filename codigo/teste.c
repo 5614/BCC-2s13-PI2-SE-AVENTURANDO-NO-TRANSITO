@@ -30,6 +30,8 @@ ALLEGRO_FONT *fonte_menu = NULL;
 //Apontador da imagens da historia do jogo
 ALLEGRO_BITMAP *imagem = NULL;
 
+//imgaens tutorial
+ALLEGRO_BITMAP *como = NULL;
 //Imagens de primeiros socorros
 ALLEGRO_BITMAP *jogo = NULL;
 ALLEGRO_BITMAP *jogo2 = NULL;
@@ -228,14 +230,13 @@ ALLEGRO_BITMAP *dd40 = NULL;
 ALLEGRO_BITMAP *dd41 = NULL;
 ALLEGRO_BITMAP *dd42 = NULL;
 
+
+
+
+
+
 //Apontador para audio
 ALLEGRO_AUDIO_STREAM *musica = NULL;
-
-//Apontador do audio de acerto
-ALLEGRO_AUDIO_STREAM *erro = NULL;
-
-//Apontador do audio de acerto
-ALLEGRO_AUDIO_STREAM *acerto = NULL;
 
 //Apontador para efeitos sonoros
 ALLEGRO_SAMPLE *sample = NULL;
@@ -252,6 +253,8 @@ void tema(int tecla)
     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 100, ALLEGRO_ALIGN_RIGHT, "4-Direção Defensiva"); 
     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-80, 200, ALLEGRO_ALIGN_RIGHT, "-5-Legislação");         
     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 300, ALLEGRO_ALIGN_RIGHT, "6-Meio Ambiente"); 
+     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 400, ALLEGRO_ALIGN_RIGHT, "7-Tutorial"); 
+
 
     //Quando o usuario escolher um o tema, aparecera um apenas o tema de sua escolha com a tela branca
     switch(tecla)
@@ -284,6 +287,12 @@ void tema(int tecla)
         case 6:
         al_clear_to_color(al_map_rgb(255, 255, 255));
         al_draw_text(fonte, al_map_rgb(0, 255, 0), LARGURA_TELA-10, 300, ALLEGRO_ALIGN_RIGHT, "6-Meio Ambiente");
+        break;
+
+
+        case 7:
+        al_clear_to_color(al_map_rgb(255, 255, 255));
+        al_draw_text(fonte, al_map_rgb(0, 255, 0), LARGURA_TELA-10, 400, ALLEGRO_ALIGN_RIGHT, "7-Tutorial");
         break;
     }
 }
@@ -318,7 +327,7 @@ int main()
 {
     int temp=0;
     bool sair = false;
-    int tecla = 0, tecla_jogo = 0, teclas = 0;
+    int tecla = 0, tecla_jogo = 0;
     int enter = 0;
     int i, n, m, o, p, q, r, s;
 
@@ -387,8 +396,6 @@ int main()
             }
         }
 
-        al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
-        al_set_audio_stream_playing(musica, true); 
 
         posicao_menu(tecla);
 
@@ -404,7 +411,11 @@ int main()
                 //Imagens dinamicas que serao exibidas para
                 //o entendimento da historia do jogo
               
+
                 //primeira imagem a ser exibida 
+
+        al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
+        al_set_audio_stream_playing(musica, true); 
 
                 imagem = al_load_bitmap("01.png");
                 if(!imagem)
@@ -479,7 +490,9 @@ int main()
                 al_rest(01.0);
               
                 //looping para funcionar o segundo menu do jogo
+               
                 al_destroy_audio_stream(musica);
+                menu:
                 while(!sair)
                 {
                     al_clear_to_color(al_map_rgb(255, 255, 255));
@@ -489,7 +502,8 @@ int main()
                     al_draw_text(fonte, al_map_rgb(0, 0, 0), 10, 300, ALLEGRO_ALIGN_LEFT, "3-Mecânica");
                     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 100, ALLEGRO_ALIGN_RIGHT, "4-Direção Defensiva"); 
                     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-80, 200, ALLEGRO_ALIGN_RIGHT, "-5-Legislação");         
-                    al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 300, ALLEGRO_ALIGN_RIGHT, "6-Meio Ambiente"); 
+                    al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 300, ALLEGRO_ALIGN_RIGHT, "6-Meio Ambiente");
+                     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 400, ALLEGRO_ALIGN_RIGHT, "7-Tutorial");  
 
                     al_flip_display();
 
@@ -526,6 +540,11 @@ int main()
                                 case ALLEGRO_KEY_6:
                                 tecla_jogo = 6;
                                 break;
+
+
+                                case ALLEGRO_KEY_7:
+                                tecla_jogo = 7;
+                                break;
                             }
                         }
                         else if(evento_jogo.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
@@ -539,11 +558,14 @@ int main()
                     al_flip_display();
                     
                     //Se o usuario escolher Primeiros Socorros
+     
 
                     if(tecla_jogo == 1)
                     {
+                        al_play_sample(sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                         al_destroy_font(fonte);
                         al_rest(00.7);
+
 
                         //Aqui ira iniciar o jogo caso o usuario escolha o tema primeiros socorros
                         //o loop funcionara escolhendo 1 pergunta por etapa, para cada etapa terá um certo numero
@@ -581,79 +603,70 @@ int main()
                         jogo30 = al_load_bitmap("ps30_RESPOSTA1.png");
                         jogo31 = al_load_bitmap("ps32_RESPOSTA3.png");
                         jogo32 = al_load_bitmap("ps33_RESPOSTA3.png");
-                        jogo33 = al_load_bitmap("ps34_RESPOSTA3.png");
+                        jogo33 = al_load_bitmap("ps_34_RESPOSTA3.png");
 
-                        while(!al_is_event_queue_empty(fila_eventos))
-                        {
-                            ALLEGRO_EVENT jogar;
-                            al_wait_for_event(fila_eventos, &jogar);
-
-                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
-                            {
-                                switch(jogar.keyboard.keycode)
-                                {
-                                    case ALLEGRO_KEY_1:
-                                    teclas = 1;
-                                    break;
-
-                                    case ALLEGRO_KEY_2:
-                                    teclas = 2;
-                                    break;
-
-                                    case ALLEGRO_KEY_3:
-                                    teclas = 3;
-                                    break;
-
-                                    case ALLEGRO_KEY_4:
-                                    teclas = 4;
-                                    break;
-
-                                    case ALLEGRO_KEY_ESCAPE:
-                                    teclas = 5;
-                                    break;
-                                }
-                            }
-                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
-                            {
-                                sair = true;
-                            }
-                        }
                         //PRIMEIRA PERGUNTA A SER EXIBIDA (etapa 1)
 
                         for(i=0; i<1; i++)
                         {
                             srand((unsigned)time(NULL));
-                            n = rand() % 4;
+                            n = rand() % 3;
 
                             if(n == 0)
                             {
                                 al_draw_bitmap(jogo, 0, 0, 0);
                                 al_flip_display();
+                               
+
+                                if(tecla_jogo==1){
+
+                                    goto proxima;
+                                }
+                                else{
+                                    goto menu;
+                                }
                             }
                             else if(n == 1)
                             {
                                 al_draw_bitmap(jogo2, 0, 0, 0);
                                 al_flip_display();
-                                al_rest(02.0);
+                                
+                                 if(tecla_jogo==1){
+
+                                    goto proxima;
+                                }
+                                else{
+                                    goto menu;
+                                }
                             }
                             else if(n == 2)
                             {
                                 al_draw_bitmap(jogo3, 0, 0, 0);
                                 al_flip_display();
+                                 if(tecla_jogo==1){
 
-                                al_rest(02.0);
+                                    goto proxima;
+                                }
+                                else{
+                                    goto menu;
+                                }
                             }
                             else if(n==3)
                             {
-                                al_draw_bitmap(jogo4, 0, 0, 0);
-                                al_flip_display();  
+                             al_draw_bitmap(jogo4, 0, 0, 0);
+                                al_flip_display();
+                                 if(tecla_jogo==1){
 
-                                al_rest(02.0);                        
+                                    goto proxima;
+                                }
+                                else{
+                                    goto menu;
+                                } 
                             }
                         }
 
                         //SEGUNDA PERGUNTA A SER EXIBIDA (etapa 2)
-
+                        proxima:
                         for(i=0; i<1; i++)
                         {
                             m = rand() % 4;
@@ -921,7 +934,7 @@ int main()
                           for(i=0; i<1; i++)
                         {
                             srand((unsigned)time(NULL));
-                            n = rand() % 4;
+                            n = rand() % 3;
 
                             if(n == 0)
                             {
@@ -1183,12 +1196,12 @@ int main()
 
                         al_rest(0.07);
 
-                        dd = al_load_bitmap("dd1_RESPOSTA4.png");
-                        dd2 = al_load_bitmap("dd2_RESPOSTA2.png");
-                        dd3 = al_load_bitmap("dd3_RESPOSTA1.png");
-                        dd4 = al_load_bitmap("dd4_RESPOSTA1.png");
-                        dd5 = al_load_bitmap("dd5_RESPOSTA1.png");
-                        dd6 = al_load_bitmap("dd6_RESPOSTA1.png");
+                            dd = al_load_bitmap("dd1_RESPOSTA4.png");
+                            dd2 = al_load_bitmap("dd2_RESPOSTA2.png");
+                            dd3 = al_load_bitmap("dd3_RESPOSTA1.png");
+                            dd4 = al_load_bitmap("dd4_RESPOSTA1.png");
+                            dd5 = al_load_bitmap("dd5_RESPOSTA1.png");
+                            dd6 = al_load_bitmap("dd6_RESPOSTA1.png");
                             dd7 = al_load_bitmap("dd7_RESPOSTA2.png");
                             dd8 = al_load_bitmap("dd8_RESPOSTA2.png");
                             dd9 = al_load_bitmap("dd9_RESPOSTA2.png");
@@ -2386,9 +2399,34 @@ int main()
 
                         sair=true;
                     }
-        
+
+
+                    else if(tecla_jogo==7){
+                        al_rest(0.07);
+
+                        como = al_load_bitmap("como jogar.jpg");
+
+                        al_draw_bitmap(como, 0,0,0);
+                        
+                        al_flip_display();
+                        al_rest(05.0);
+                        tecla_jogo=0;
+                        goto menu;
+                        al_flip_display();
+                    }
+
+
+
+
+
+
+
+                
+
 
                 } 
+
+
             }
         }
     }
@@ -2423,7 +2461,7 @@ bool menu()
         return false;
     }
 
-    if (!al_reserve_samples(3))
+    if (!al_reserve_samples(1))
     {
         fprintf(stderr, "Falha ao alocar canais de áudio.\n");
         return false;
@@ -2438,6 +2476,14 @@ bool menu()
     if (!al_init_image_addon())
     {
         fprintf(stderr, "Falha ao inicializar add-on allegro_image.\n");
+        return false;
+    }
+
+     sample = al_load_sample("errado.ogg");
+    if (!sample)
+    {
+        fprintf(stderr, "Falha ao carregar sample.\n");
+        al_destroy_display(janela);
         return false;
     }
  
@@ -2491,26 +2537,7 @@ bool menu()
         al_destroy_event_queue(fila_eventos);
         al_destroy_display(janela);
         al_destroy_sample(sample);
-        return false;
-    }
-
-    acerto = al_load_audio_stream("acerto.ogg", 4, 1024);
-    if(!acerto)
-    {
-        fprintf(stderr, "Falha ao carregar som de acerto\n");
-        al_destroy_event_queue(fila_eventos);
-        al_destroy_display(janela);
-        al_destroy_sample(sample);
-        return false;
-    }
-
-    erro = al_load_audio_stream("erro.ogg", 4, 1024);
-    if(!erro)
-    {
-        fprintf(stderr, "Falha ao carregar o som de erro\n");
-        al_destroy_event_queue(fila_eventos);
-        al_destroy_display(janela);
-        al_destroy_sample(sample);
+        
         return false;
     }
     
@@ -2523,7 +2550,7 @@ bool menu()
         al_destroy_event_queue(fila_eventos);
         return false;
     }
-
+ 
     al_register_event_source(fila_eventos, al_get_keyboard_event_source());
     al_register_event_source(fila_eventos, al_get_display_event_source(janela));
 
