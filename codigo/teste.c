@@ -563,7 +563,7 @@ int main()
 
                     if(tecla_jogo == 1)
                     {
-                        al_play_sample(sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                        //al_play_sample(sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                         al_destroy_font(fonte);
                         al_rest(00.7);
 
@@ -2523,13 +2523,13 @@ bool menu()
         return false;
     }
 
-     sample = al_load_sample("errado.ogg");
-    if (!sample)
+     //sample = al_load_sample("errado.ogg");
+    /*if (!sample)
     {
         fprintf(stderr, "Falha ao carregar sample.\n");
         al_destroy_display(janela);
         return false;
-    }
+    }*/
  
     if (!al_install_keyboard())
     {
