@@ -330,10 +330,7 @@ int main()
     int tecla = 0, tecla_jogo = 0;
     int enter = 0;
     int i, n, m, o, p, q, r, s;
-<<<<<<< HEAD
-=======
     int teclas=0;
->>>>>>> c7e6f4065a4e4c77281d61422de32931174ea44c
 
   
     if (!menu())
@@ -571,13 +568,9 @@ int main()
                         al_rest(00.7);
 
 
-<<<<<<< HEAD
-=======
                         while(!al_is_event_queue_empty(fila_eventos))
                         {
                             ALLEGRO_EVENT jogar;
-                            jogar=NULL;
-                            fila_eventos=NULL;
                             al_wait_for_event(fila_eventos, &jogar);
 
                             if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -612,7 +605,6 @@ int main()
                         }
 
 
->>>>>>> c7e6f4065a4e4c77281d61422de32931174ea44c
                         //Aqui ira iniciar o jogo caso o usuario escolha o tema primeiros socorros
                         //o loop funcionara escolhendo 1 pergunta por etapa, para cada etapa terá um certo numero
                         //de perguntas para escolher aleatoriamente, que no caso aqui sao 3 perguntas, e apenas 1 sera a escolhida
@@ -662,17 +654,6 @@ int main()
                             {
                                 al_draw_bitmap(jogo, 0, 0, 0);
                                 al_flip_display();
-<<<<<<< HEAD
-                               
-
-                                if(tecla_jogo==1){
-
-                                    goto proxima;
-                                }
-                                else{
-                                    goto menu;
-                                }
-=======
 
                                 do{
                                if(teclas==2){
@@ -683,22 +664,11 @@ int main()
                            }while(teclas==0);
 
                                 
->>>>>>> c7e6f4065a4e4c77281d61422de32931174ea44c
                             }
                             else if(n == 1)
                             {
                                 al_draw_bitmap(jogo2, 0, 0, 0);
                                 al_flip_display();
-<<<<<<< HEAD
-                                
-                                 if(tecla_jogo==1){
-
-                                    goto proxima;
-                                }
-                                else{
-                                    goto menu;
-                                }
-=======
                                  do{
                                if(teclas==2){
                                goto proxima;
@@ -708,21 +678,11 @@ int main()
                            }while(teclas==0);
                                  
                                 
->>>>>>> c7e6f4065a4e4c77281d61422de32931174ea44c
                             }
                             else if(n == 2)
                             {
                                 al_draw_bitmap(jogo3, 0, 0, 0);
                                 al_flip_display();
-<<<<<<< HEAD
-                                 if(tecla_jogo==1){
-
-                                    goto proxima;
-                                }
-                                else{
-                                    goto menu;
-                                }
-=======
                                 do{
                                if(teclas==2){
                                 goto proxima;
@@ -732,21 +692,11 @@ int main()
                            }while(teclas==0);
                                  
 
->>>>>>> c7e6f4065a4e4c77281d61422de32931174ea44c
                             }
                             else if(n==3)
                             {
                              al_draw_bitmap(jogo4, 0, 0, 0);
                                 al_flip_display();
-<<<<<<< HEAD
-                                 if(tecla_jogo==1){
-
-                                    goto proxima;
-                                }
-                                else{
-                                    goto menu;
-                                } 
-=======
 
                                  do{
                                if(teclas==2){
@@ -756,16 +706,11 @@ int main()
 
                            }while(teclas==0);
                                  
->>>>>>> c7e6f4065a4e4c77281d61422de32931174ea44c
                             }
                         }
 
                         //SEGUNDA PERGUNTA A SER EXIBIDA (etapa 2)
-<<<<<<< HEAD
-                        proxima:
-=======
                        proxima:
->>>>>>> c7e6f4065a4e4c77281d61422de32931174ea44c
                         for(i=0; i<1; i++)
                         {
                             m = rand() % 4;
