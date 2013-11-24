@@ -571,6 +571,8 @@ int main()
                         while(!al_is_event_queue_empty(fila_eventos))
                         {
                             ALLEGRO_EVENT jogar;
+                            jogar=NULL;
+                            fila_eventos=NULL;
                             al_wait_for_event(fila_eventos, &jogar);
 
                             if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -2586,7 +2588,7 @@ bool menu()
     }
     
     //Carregando imagem de fundo do menu inicial 
-    fundo = al_load_bitmap("men.jpg");
+    fundo = al_load_bitmap("men.png");
     if (!fundo)
     {
         fprintf(stderr, "Falha ao carregar imagem de fundo.\n");
