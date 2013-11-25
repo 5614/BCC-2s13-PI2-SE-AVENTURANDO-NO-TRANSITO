@@ -655,6 +655,10 @@ int main()
                                 al_draw_bitmap(jogo, 0, 0, 0);
                                 al_flip_display();
 
+                                if(teclas == 1){
+                                    printf("aqui");
+                                }
+
                                 do{
                                if(teclas==2){
                                 goto proxima;
