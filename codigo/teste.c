@@ -76,7 +76,7 @@ ALLEGRO_BITMAP *mec4 = NULL;
 ALLEGRO_BITMAP *mec5 = NULL;
 ALLEGRO_BITMAP *mec6 = NULL;
 ALLEGRO_BITMAP *mec7 = NULL;
-ALLEGRO_BITMAP *mec8 = NULL;
+/*ALLEGRO_BITMAP *mec8 = NULL;
 ALLEGRO_BITMAP *mec9 = NULL;
 ALLEGRO_BITMAP *mec10 = NULL;
 ALLEGRO_BITMAP *mec11 = NULL;
@@ -89,8 +89,7 @@ ALLEGRO_BITMAP *mec17 = NULL;
 ALLEGRO_BITMAP *mec18 = NULL;
 ALLEGRO_BITMAP *mec19 = NULL;
 ALLEGRO_BITMAP *mec20 = NULL;
-ALLEGRO_BITMAP *mec21 = NULL;
-
+ALLEGRO_BITMAP *mec21 = NULL;*/
 
 
 
@@ -109,6 +108,7 @@ ALLEGRO_BITMAP *meio11 = NULL;
 ALLEGRO_BITMAP *meio12 = NULL;
 ALLEGRO_BITMAP *meio13 = NULL;
 ALLEGRO_BITMAP *meio14 = NULL;
+
 
 
 //Imagens de legislacao
@@ -231,10 +231,6 @@ ALLEGRO_BITMAP *dd41 = NULL;
 ALLEGRO_BITMAP *dd42 = NULL;
 
 
-
-
-
-
 //Apontador para audio
 ALLEGRO_AUDIO_STREAM *musica = NULL;
 
@@ -327,10 +323,10 @@ int main()
 {
     int temp=0;
     bool sair = false;
-    int tecla = 0, tecla_jogo = 0;
+    int tecla = 0, tecla_jogo = 0, teclas = 0, tecla_h, tecla_i, tecla_j, tecla_k, tecla_l, teclas_vol;
     int enter = 0;
-    int i, n, m, o, p, q, r, s;
-    int teclas=0;
+    int v=0;
+    int teclas1=0, teclas2=0, teclas3=0, teclas4=0;
 
   
     if (!menu())
@@ -397,7 +393,6 @@ int main()
             }
         }
 
-
         posicao_menu(tecla);
 
         al_flip_display();
@@ -406,17 +401,16 @@ int main()
         //o jogo funcionará a partir daqui, aproveitado o looping de sair do teclado.
         if(temp==1)
         {
+            temp = 0;
             if(tecla==5)
-            {
-                 
+            {         tecla = 0;
                 //Imagens dinamicas que serao exibidas para
                 //o entendimento da historia do jogo
               
-
                 //primeira imagem a ser exibida 
 
-        al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
-        al_set_audio_stream_playing(musica, true); 
+                al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
+                al_set_audio_stream_playing(musica, true); 
 
                 imagem = al_load_bitmap("01.png");
                 if(!imagem)
@@ -430,9 +424,39 @@ int main()
                 
                 al_flip_display();
 
-                al_rest(01.0);
+                al_rest(02.0);
 
+                do{
+                while(!al_is_event_queue_empty(fila_eventos))
+                {
+                    ALLEGRO_EVENT evento_jogo;
+                    al_wait_for_event(fila_eventos, &evento_jogo);
 
+                    if(evento_jogo.type == ALLEGRO_EVENT_KEY_DOWN)
+                    {
+                        switch(evento_jogo.keyboard.keycode)
+                        {
+                            case ALLEGRO_KEY_ENTER:
+                            tecla_h = 1;
+                            break;
+
+                            case ALLEGRO_KEY_ESCAPE:
+                            tecla_h = 2;
+                            break;
+                        }
+                    }
+                    else if(evento_jogo.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                    {
+                        sair = true;
+                    }
+                }
+                if(tecla_h == 1)
+                {
+                    goto pula;
+                }
+                }while(tecla_h != 1);
+
+                pula:
                 //Segunda imagem a ser exibida
                 imagem = al_load_bitmap("02.png");
                 if(!imagem)
@@ -446,9 +470,37 @@ int main()
      
                 al_flip_display();
      
-                al_rest(01.0);
- 
+                do{
+                while(!al_is_event_queue_empty(fila_eventos))
+                {
+                    ALLEGRO_EVENT evento_jogo;
+                    al_wait_for_event(fila_eventos, &evento_jogo);
 
+                    if(evento_jogo.type == ALLEGRO_EVENT_KEY_DOWN)
+                    {
+                        switch(evento_jogo.keyboard.keycode)
+                        {
+                            case ALLEGRO_KEY_ENTER:
+                            tecla_i = 1;
+                            break;
+
+                            case ALLEGRO_KEY_ESCAPE:
+                            tecla_i = 2;
+                            break;
+                        }
+                    }
+                    else if(evento_jogo.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                    {
+                        sair = true;
+                    }
+                }
+                if(tecla_i == 1)
+                {
+                    goto pula_segunda;
+                }
+                }while(tecla_i != 1);
+ 
+                pula_segunda:
                 //Terceira imagem a ser exibida
                 imagem = al_load_bitmap("03.png"); 
                 if(!imagem)
@@ -462,9 +514,37 @@ int main()
     
                 al_flip_display();
  
-                al_rest(01.0);
-                
+                do{
+                while(!al_is_event_queue_empty(fila_eventos))
+                {
+                    ALLEGRO_EVENT evento_jogo;
+                    al_wait_for_event(fila_eventos, &evento_jogo);
 
+                    if(evento_jogo.type == ALLEGRO_EVENT_KEY_DOWN)
+                    {
+                        switch(evento_jogo.keyboard.keycode)
+                        {
+                            case ALLEGRO_KEY_ENTER:
+                            tecla_j = 1;
+                            break;
+
+                            case ALLEGRO_KEY_ESCAPE:
+                            tecla_j = 2;
+                            break;
+                        }
+                    }
+                    else if(evento_jogo.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                    {
+                        sair = true;
+                    }
+                }
+                if(tecla_j == 1)
+                {
+                    goto pula_terceira;
+                }
+                }while(tecla_j != 1);
+                
+                pula_terceira:
                 //Quarta imagem a ser exibida
                 imagem = al_load_bitmap("04.png");
 
@@ -472,9 +552,37 @@ int main()
 
                 al_flip_display();
 
-                al_rest(01.0);
+                do{
+                while(!al_is_event_queue_empty(fila_eventos))
+                {
+                    ALLEGRO_EVENT evento_jogo;
+                    al_wait_for_event(fila_eventos, &evento_jogo);
 
+                    if(evento_jogo.type == ALLEGRO_EVENT_KEY_DOWN)
+                    {
+                        switch(evento_jogo.keyboard.keycode)
+                        {
+                            case ALLEGRO_KEY_ENTER:
+                            tecla_k = 1;
+                            break;
 
+                            case ALLEGRO_KEY_ESCAPE:
+                            tecla_k = 2;
+                            break;
+                        }
+                    }
+                    else if(evento_jogo.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                    {
+                        sair = true;
+                    }
+                }
+                if(tecla_k == 1)
+                {
+                    goto pula_quarta;
+                }
+                }while(tecla_k != 1);
+
+                pula_quarta:
                 //Quinta imagem a ser exibida
                 imagem = al_load_bitmap("05.png");
                 if(!imagem)
@@ -488,12 +596,78 @@ int main()
 
                 al_flip_display();
 
-                al_rest(01.0);
-              
+                do{
+                while(!al_is_event_queue_empty(fila_eventos))
+                {
+                    ALLEGRO_EVENT evento_jogo;
+                    al_wait_for_event(fila_eventos, &evento_jogo);
+
+                    if(evento_jogo.type == ALLEGRO_EVENT_KEY_DOWN)
+                    {
+                        switch(evento_jogo.keyboard.keycode)
+                        {
+                            case ALLEGRO_KEY_ENTER:
+                            tecla_l = 1;
+                            break;
+
+                            case ALLEGRO_KEY_ESCAPE:
+                            tecla_l = 2;
+                            break;
+                        }
+                    }
+                    else if(evento_jogo.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                    {
+                        sair = true;
+                    }
+                }
+                if(tecla_l == 1)
+                {
+                    goto pula_quinta;
+                }
+                }while(tecla_l != 1);
+
+                car2:
+                if(v==4){
+                imagem = al_load_bitmap("segundo.jpg");
+                if(!imagem)
+                {
+                    fprintf(stderr, "Falha ao carregar imagem do segundo carro.\n");
+                    al_destroy_display(janela);
+                    return -1;
+                }
+
+                al_draw_bitmap(imagem, 0, 0, 0);
+
+                al_flip_display();
+
+                al_rest(03.0);
+                return 0;
+              }
+
+              car: 
+               if(v==5){             
+                imagem = al_load_bitmap("primeiro.jpg");
+                if(!imagem)
+                {
+                    fprintf(stderr, "Falha ao carregar imagem do primeiro carro.\n");
+                    al_destroy_display(janela);
+                    return -1;
+                }
+
+                al_draw_bitmap(imagem, 0, 0, 0);
+
+                al_flip_display();
+
+                al_rest(04.0);
+                return 0;
+              }
+          }
+                pula_quinta:
                 //looping para funcionar o segundo menu do jogo
-               
                 al_destroy_audio_stream(musica);
+                voltar:
                 menu:
+                al_flip_display();
                 while(!sair)
                 {
                     al_clear_to_color(al_map_rgb(255, 255, 255));
@@ -563,46 +737,9 @@ int main()
 
                     if(tecla_jogo == 1)
                     {
-                        //al_play_sample(sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                        tecla_jogo = 0;
                         al_destroy_font(fonte);
                         al_rest(00.7);
-
-
-                        while(!al_is_event_queue_empty(fila_eventos))
-                        {
-                            ALLEGRO_EVENT jogar;
-                            al_wait_for_event(fila_eventos, &jogar);
-
-                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
-                            {
-                                switch(jogar.keyboard.keycode)
-                                {
-                                    case ALLEGRO_KEY_1:
-                                    teclas = 1;
-                                    break;
-
-                                    case ALLEGRO_KEY_2:
-                                    teclas = 2;
-                                    break;
-
-                                    case ALLEGRO_KEY_3:
-                                    teclas = 3;
-                                    break;
-
-                                    case ALLEGRO_KEY_4:
-                                    teclas = 4;
-                                    break;
-
-                                    case ALLEGRO_KEY_ESCAPE:
-                                    teclas = 5;
-                                    break;
-                                }
-                            }
-                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
-                            {
-                                sair = true;
-                            }
-                        }
 
 
                         //Aqui ira iniciar o jogo caso o usuario escolha o tema primeiros socorros
@@ -641,300 +778,278 @@ int main()
                         jogo30 = al_load_bitmap("ps30_RESPOSTA1.png");
                         jogo31 = al_load_bitmap("ps32_RESPOSTA3.png");
                         jogo32 = al_load_bitmap("ps33_RESPOSTA3.png");
-                        jogo33 = al_load_bitmap("ps_34_RESPOSTA3.png");
+                        jogo33 = al_load_bitmap("ps34_RESPOSTA3.png");
 
                         //PRIMEIRA PERGUNTA A SER EXIBIDA (etapa 1)
+                        do{
 
-                        for(i=0; i<1; i++)
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            n = rand() % 3;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(n == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(jogo, 0, 0, 0);
-                                al_flip_display();
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas = 1;
+                                    break;
 
-                                if(teclas == 1){
-                                    printf("aqui");
+                                    case ALLEGRO_KEY_2:
+                                    teclas = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas = 5;
+                                    break;
                                 }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(jogo, 0, 0, 0);
+                        al_flip_display();
 
-                                do{
-                               if(teclas==2){
-                                goto proxima;
-                               }
+                        if(teclas==1)
+                        {
+                            goto segunda_ps;
+                        }
+                        else if(teclas==2 || teclas ==3 || teclas==4)
+                        {
+                            teclas = 0;
+                            al_destroy_bitmap(jogo);
+                            return 0;
+                        }
 
+                        }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
 
-                           }while(teclas==0);
+                                                            
+                        segunda_ps:
+                        do{
+                                                               
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
+                            {
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas1 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas1 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas1 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas1 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas1 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(jogo3, 0, 0, 0);
+                        al_flip_display();
+                               
+                        if(teclas1==2)
+                        {
+                            goto terceira_ps;
+                        }
+                        else if(teclas1==1 || teclas1 ==3 || teclas1==4)
+                        {
+                            return 0;
+                        }
+
+                        }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
                                 
-                            }
-                            else if(n == 1)
+                              
+                        terceira_ps:
+                        do{
+                         
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
+
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(jogo2, 0, 0, 0);
-                                al_flip_display();
-                                 do{
-                               if(teclas==2){
-                               goto proxima;
-                               }
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas2 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas2 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas2 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas2 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas2 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(jogo4, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas2==2)
+                        {
+                            goto quarta_ps;
+                        }
+                        else if(teclas2==3 || teclas2 ==1 || teclas2==4)
+                        {
+                            return 0;
+                        }
+
+                        }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
 
 
-                           }while(teclas==0);
-                                 
+                        quarta_ps:
+                        do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
+
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
+                            {
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas3 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas3 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas3 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas3 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas3 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(jogo5, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas3==2)
+                        {
+                            goto quinta_ps;
+                        }
+                        else if(teclas3==1 || teclas3 ==3 || teclas3==4)
+                        {
+                            v=4;
+                            goto car2;
+                        }
+
+                        }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
                                 
-                            }
-                            else if(n == 2)
-                            {
-                                al_draw_bitmap(jogo3, 0, 0, 0);
-                                al_flip_display();
-                                do{
-                               if(teclas==2){
-                                goto proxima;
-                               }
+                          
+                        quinta_ps:
+                        do{
+                                
 
-
-                           }while(teclas==0);
-                                 
-
-                            }
-                            else if(n==3)
-                            {
-                             al_draw_bitmap(jogo4, 0, 0, 0);
-                                al_flip_display();
-
-                                 do{
-                               if(teclas==2){
-                                goto proxima;
-                               }
-
-
-                           }while(teclas==0);
-                                 
-                            }
-                        }
-
-                        //SEGUNDA PERGUNTA A SER EXIBIDA (etapa 2)
-                       proxima:
-                        for(i=0; i<1; i++)
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            m = rand() % 4;
-                            if(m == 0)
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
+
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(jogo5, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas4 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas4 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas4 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas4 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas4 = 5;
+                                    break;
+                                }
                             }
-                            else if(m == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(jogo6, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 2)
-                            {
-                                al_draw_bitmap(jogo7, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 3)
-                            {
-                              al_draw_bitmap(jogo8, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
-                            else if(m == 4)
-                            {
-                              al_draw_bitmap(jogo9, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                                sair = true;
                             }
                         }
+                        al_draw_bitmap(jogo6, 0, 0, 0);
+                        al_flip_display();
 
-                        //TERCEIRA PERGUNTA A SER EXIBIDA (etapa3)
-
-                         for(i=0; i<1; i++)
+                        if(teclas4==1)
                         {
-                            o = rand() % 5;
-                            if(o == 0)
-                            {
-                                al_draw_bitmap(jogo10, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 1)
-                            {
-                                al_draw_bitmap(jogo11, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 2)
-                            {
-                                al_draw_bitmap(jogo12, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 3)
-                            {
-                              al_draw_bitmap(jogo13, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
-                            else if(o == 4)
-                            {
-                              al_draw_bitmap(jogo14, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
+                            v=5;
+                            goto car;
                         }
-
-                        //QUARTA PERGUNTA A SER EXIBIDA (etapa4)
-
-                         for(i=0; i<1; i++)
+                        else if(teclas4==2 || teclas4 ==3 || teclas4==4)
                         {
-                            p = rand() % 3;
-                            if(p == 0)
-                            {
-                                al_draw_bitmap(jogo15, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(p == 1)
-                            {
-                                al_draw_bitmap(jogo16, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(p == 2)
-                            {
-                                al_draw_bitmap(jogo17, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(p == 3)
-                            {
-                              al_draw_bitmap(jogo18, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
+                            return 0;
                         }
 
-
-                        //Quinta pergunta a ser exibida(etapa 5)
-
-
-                        for(i=0; i<1; i++)
-                        {
-                            q = rand() % 4;
-                            if(q == 0)
-                            {
-                                al_draw_bitmap(jogo19, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 1)
-                            {
-                                al_draw_bitmap(jogo20, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 2)
-                            {
-                                al_draw_bitmap(jogo21, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 3)
-                            {
-                              al_draw_bitmap(jogo22, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
-                            else if(q == 4)
-                            {
-                              al_draw_bitmap(jogo23, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
-                        }
-
-                        //Sexta pergunta a ser exibida (etapa6)
-                        for(i=0; i<1; i++)
-                        {
-                            r = rand() % 4;
-                            if(r == 0)
-                            {
-                                al_draw_bitmap(jogo24, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 1)
-                            {
-                                al_draw_bitmap(jogo25, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 2)
-                            {
-                                al_draw_bitmap(jogo26, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 3)
-                            {
-                              al_draw_bitmap(jogo27, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
-                            else if(r == 4)
-                            {
-                              al_draw_bitmap(jogo28, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
-                        }
-
-                         //Setima pergunta a ser exibida (etapa 7)
-                         for(i=0; i<1; i++)
-                        {
-                            s = rand() % 4;
-                            if(s == 0)
-                            {
-                                al_draw_bitmap(jogo29, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(s == 1)
-                            {
-                                al_draw_bitmap(jogo30, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(s == 2)
-                            {
-                                al_draw_bitmap(jogo31, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(s == 3)
-                            {
-                              al_draw_bitmap(jogo32, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
-
-                            else if(s == 4)
-                            {
-                              al_draw_bitmap(jogo33, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                            }
-
-
-                        }
-
-
-
-
+                        }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
+                        
+                        
                         sair = true;
                    
 
@@ -948,9 +1063,9 @@ int main()
                             al_rest(0.07);
 
                          sinal = al_load_bitmap("sinal1_RESPOSTA2.png");
-                          sinal2 = al_load_bitmap("perg_placa_1 - resp. 1.png");
+                          sinal2 = al_load_bitmap("sinal2_RESPOSTA3.png");
                           sinal3 = al_load_bitmap("sinal3_RESPOSTA3.png");
-                          sinal4 = al_load_bitmap("perg_placa_1 - resp. 1.png");
+                          sinal4 = al_load_bitmap("sinal4_RESPOSTA2.png");
                           sinal5 = al_load_bitmap("sinal5_RESPOSTA1.png");
                           sinal6 = al_load_bitmap("perg_placa_3 - resp. 4.png");
                           sinal7 = al_load_bitmap("sinal7_RESPOSTA1.png");
@@ -979,270 +1094,281 @@ int main()
 
                          //Primeira pergunta a ser exibida
 
-                          for(i=0; i<1; i++)
+                        do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            n = rand() % 3;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(n == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(sinal, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas = 5;
+                                    break;
+                                }
                             }
-                            else if(n == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(sinal2, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(n == 2)
-                            {
-                                al_draw_bitmap(sinal3, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                             }
-                            else if(n==3)
-                            {
-                             al_draw_bitmap(sinal4, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
+                        }
+                        al_draw_bitmap(sinal, 0, 0, 0);
+                        al_flip_display();
 
-                      }
-
-
-
-
-                     //Segunda pergunta a ser exibida
-
-                      for(i=0; i<1; i++)
+                        if(teclas==2)
                         {
-                            srand((unsigned)time(NULL));
-                            m = rand() % 3;
-
-                            if(m == 0)
-                            {
-                                al_draw_bitmap(sinal5, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 1)
-                            {
-                                al_draw_bitmap(sinal6, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 2)
-                            {
-                                al_draw_bitmap(sinal7, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                             }
-                            else if(m==3)
-                            {
-                             al_draw_bitmap(sinal8, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-
-                      }
-
-
-                     //Terceira pergunta a ser exibida
-
-                      for(i=0; i<1; i++)
+                            goto segunda_si;
+                        }
+                        else if(teclas==1 || teclas ==3 || teclas==4)
                         {
-                            srand((unsigned)time(NULL));
-                            o = rand() % 3;
+                            return 0;
+                        }
 
-                            if(o == 0)
-                            {
-                                al_draw_bitmap(sinal9, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 1)
-                            {
-                                al_draw_bitmap(sinal10, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 2)
-                            {
-                                al_draw_bitmap(sinal11, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                             }
-                            else if(o==3)
-                            {
-                             al_draw_bitmap(sinal12, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
+                        }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
 
-                      }
-
-
-                      //Quarta pergunta a ser exibida
-
-                      for(i=0; i<1; i++)
+                                                            
+                        segunda_si:
+                        do{
+                                                               
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            p = rand() % 3;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(p == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(sinal13, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas1 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas1 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas1 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas1 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas1 = 5;
+                                    break;
+                                }
                             }
-                            else if(p == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(sinal14, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(p == 2)
-                            {
-                                al_draw_bitmap(sinal15, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                             }
-                            else if(p == 3)
-                            {
-                             al_draw_bitmap(sinal16, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-
-                      }
-                       
-
-                       //Quinta pergunta a ser exibida
-
-                      for(i=0; i<1; i++)
+                        }
+                        al_draw_bitmap(sinal2, 0, 0, 0);
+                        al_flip_display();
+                               
+                        if(teclas1==3)
                         {
-                            srand((unsigned)time(NULL));
-                            q = rand() % 3;
-
-                            if(q == 0)
-                            {
-                                al_draw_bitmap(sinal17, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 1)
-                            {
-                                al_draw_bitmap(sinal18, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 2)
-                            {
-                                al_draw_bitmap(sinal19, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                             }
-                            else if(q==3)
-                            {
-                             al_draw_bitmap(sinal20, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-
-                      }
-
-
-                      //Sexta pergunta a ser exibida
-
-                      for(i=0; i<1; i++)
+                            goto terceira_si;
+                        }
+                        else if(teclas1==2 || teclas1 ==1 || teclas1==4)
                         {
-                            srand((unsigned)time(NULL));
-                            r = rand() % 3;
+                            return 0;
+                        }
 
-                            if(r == 0)
-                            {
-                                al_draw_bitmap(sinal21, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 1)
-                            {
-                                al_draw_bitmap(sinal22, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 2)
-                            {
-                                al_draw_bitmap(sinal23, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                             }
-                            else if(r == 3)
-                            {
-                             al_draw_bitmap(sinal24, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-
-                      }
-
-
-
-                      for(i=0; i<1; i++)
+                        }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
+                                
+                              
+                        terceira_si:
+                        do{
+                         
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            s = rand() % 3;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(s == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(sinal25, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas2 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas2 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas2 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas2 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas2 = 5;
+                                    break;
+                                }
                             }
-                            else if(s == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(sinal26, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(s == 2)
+                        }
+                        al_draw_bitmap(sinal3, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas2==3)
+                        {
+                            goto quarta_si;
+                        }
+                        else if(teclas2==2 || teclas2 ==1 || teclas2==4)
+                        {
+                            return 0;
+                        }
+
+                        }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
+
+
+                        quarta_si:
+                        do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
+
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(sinal27, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                             }
-                            else if(s == 3)
-                            {
-                             al_draw_bitmap(sinal28, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas3 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas3 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas3 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas3 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas3 = 5;
+                                    break;
+                                }
                             }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(sinal4, 0, 0, 0);
+                        al_flip_display();
 
-                      }
+                        if(teclas3==2)
+                        {
+                            goto quinta_si;
+                        }
+                        else if(teclas3==1 || teclas3 ==3 || teclas3==4)
+                        {
+                            v=4;
+                            goto car2;
+                        }
 
+                        }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
+                                
+                          
+                        quinta_si:
+                        do{
+                                
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                      sair=true;
-                  }
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
+                            {
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas4 = 1;
+                                    break;
 
+                                    case ALLEGRO_KEY_2:
+                                    teclas4 = 2;
+                                    break;
 
+                                    case ALLEGRO_KEY_3:
+                                    teclas4 = 3;
+                                    break;
 
+                                    case ALLEGRO_KEY_4:
+                                    teclas4 = 4;
+                                    break;
 
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas4 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(sinal5, 0, 0, 0);
+                        al_flip_display();
 
+                        if(teclas4==1)
+                        {
+                            v=5;
+                            goto car;
+                        }
+                        else if(teclas4==2 || teclas4 ==3 || teclas4==4)
+                        {
+                            goto menu;
+                        }
 
+                        }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
+                        
+                        
+                        sair = true;
 
+                        }  
+                        //Se o usuario escolher legislacao
 
+                        else if(tecla_jogo == 4)
+                        {
 
-
-
-
-                      //Se o usuario escolher legislacao
-
-                      else if(tecla_jogo == 4)
-                    {
-
-                        al_rest(0.07);
+                            al_rest(0.07);
 
                             dd = al_load_bitmap("dd1_RESPOSTA4.png");
                             dd2 = al_load_bitmap("dd2_RESPOSTA2.png");
@@ -1287,361 +1413,281 @@ int main()
                             dd41 = al_load_bitmap("dd43_RESPOSTA1.png");
                             dd42 = al_load_bitmap("dd44_RESPOSTA4.png");
 
-
-
-
                             //Primeira pergunta a ser exibida
+                            do{
 
-                         for(i=0; i<1; i++)
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            n = rand() % 5;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(n == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(dd, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas = 5;
+                                    break;
+                                }
                             }
-                            else if(n == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(dd2, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(n == 2)
-                            {
-                                al_draw_bitmap(dd3, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                             }
-                            else if(n==3)
-                            {
-                             al_draw_bitmap(dd4, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(n==4)
-                            {
-                             al_draw_bitmap(dd5, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
                         }
+                        al_draw_bitmap(dd, 0, 0, 0);
+                        al_flip_display();
 
-                         else if(n==5)
-                            {
-                             al_draw_bitmap(dd6, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-                    }
-
-
-
-
-
-                    //Segunda pergunta a ser exibida
-
-                         for(i=0; i<1; i++)
+                        if(teclas==4)
                         {
-                            srand((unsigned)time(NULL));
-                            m = rand() % 5;
-
-                            if(m == 0)
-                            {
-                                al_draw_bitmap(dd7, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 1)
-                            {
-                                al_draw_bitmap(dd8, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 2)
-                            {
-                                al_draw_bitmap(dd9, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m==3)
-                            {
-                             al_draw_bitmap(dd11, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(m==4)
-                            {
-                             al_draw_bitmap(dd12, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                            goto segunda_dd;
                         }
-
-                         else if(m==5)
-                            {
-                             al_draw_bitmap(dd13, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-                    }
-
-
-                    //Terceira pergunta a ser exibida
-
-                         for(i=0; i<1; i++)
+                        else if(teclas==2 || teclas ==3 || teclas==1)
                         {
-                            srand((unsigned)time(NULL));
-                            o = rand() % 5;
-
-                            if(o == 0)
-                            {
-                                al_draw_bitmap(dd14, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 1)
-                            {
-                                al_draw_bitmap(dd15, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 2)
-                            {
-                                al_draw_bitmap(dd16, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 3)
-                            {
-                             al_draw_bitmap(dd17, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(o == 4)
-                            {
-                             al_draw_bitmap(dd18, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                            return 0;
                         }
 
-                         else if(o == 5)
-                            {
-                             al_draw_bitmap(dd19, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-                    }
+                        }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
 
-
-
-                    //Quarta imagem a ser exibida
-
-                         for(i=0; i<1; i++)
+                                                            
+                        segunda_dd:
+                        do{
+                                                               
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            p = rand() % 5;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(p == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(dd20, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas1 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas1 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas1 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas1 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas1 = 5;
+                                    break;
+                                }
                             }
-                            else if(p == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(dd21, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(p == 2)
-                            {
-                                al_draw_bitmap(dd22, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(p==3)
-                            {
-                             al_draw_bitmap(dd23, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(p==4)
-                            {
-                             al_draw_bitmap(dd24, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
                         }
-
-                         else if(p==5)
-                            {
-                             al_draw_bitmap(dd25, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-                    }
-
-                    //Quinta pergunta a ser exibida
-
-                         for(i=0; i<1; i++)
+                        al_draw_bitmap(dd2, 0, 0, 0);
+                        al_flip_display();
+                               
+                        if(teclas1==2)
                         {
-                            srand((unsigned)time(NULL));
-                            q = rand() % 5;
-
-                            if(q == 0)
-                            {
-                                al_draw_bitmap(dd26, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 1)
-                            {
-                                al_draw_bitmap(dd27, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 2)
-                            {
-                                al_draw_bitmap(dd28, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q==3)
-                            {
-                             al_draw_bitmap(dd29, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(q==4)
-                            {
-                             al_draw_bitmap(dd30, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                            goto terceira_dd;
                         }
-
-                         else if(q==5)
-                            {
-                             al_draw_bitmap(dd31, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-                    }
-
-
-                    //Sexta pergunta a ser exibida
-
-                         for(i=0; i<1; i++)
+                        else if(teclas1==1 || teclas1 ==3 || teclas1==4)
                         {
-                            srand((unsigned)time(NULL));
-                            r = rand() % 5;
-
-                            if(r == 0)
-                            {
-                                al_draw_bitmap(dd32, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 1)
-                            {
-                                al_draw_bitmap(dd33, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 2)
-                            {
-                                al_draw_bitmap(dd34, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 3)
-                            {
-                             al_draw_bitmap(dd35, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(r == 4)
-                            {
-                             al_draw_bitmap(dd36, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                            return 0;
                         }
 
-                         else if(r == 5)
-                            {
-                             al_draw_bitmap(dd37, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-                    }
-
-
-
-                    //Setima pergunta a ser exibida
-
-                         for(i=0; i<1; i++)
+                        }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
+                                
+                              
+                        terceira_dd:
+                        do{
+                         
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            s = rand() % 5;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(s == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(dd38, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas2 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas2 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas2 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas2 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas2 = 5;
+                                    break;
+                                }
                             }
-                            else if(s == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(dd39, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(s == 2)
-                            {
-                                al_draw_bitmap(dd40, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(s==3)
-                            {
-                             al_draw_bitmap(dd41, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(s==4)
-                            {
-                             al_draw_bitmap(dd42, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                        }
+                        al_draw_bitmap(dd3, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas2==1)
+                        {
+                            goto quarta_dd;
+                        }
+                        else if(teclas2==2 || teclas2 ==3 || teclas2==4)
+                        {
+                            return 0;
                         }
 
-                         else if(s==5)
+                        }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
+
+
+                        quarta_dd:
+                        do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
+
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                             al_draw_bitmap(dd10, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas3 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas3 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas3 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas3 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas3 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(dd4, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas3==1)
+                        {
+                            goto quinta_dd;
+                        }
+                        else if(teclas3==2 || teclas3 ==3 || teclas3==4)
+                        {
+                            v=4;
+                            goto car2;
                         }
 
+                        }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
+                                
+                          
+                        quinta_dd:
+                        do{
+                                
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                    }
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
+                            {
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas4 = 1;
+                                    break;
 
+                                    case ALLEGRO_KEY_2:
+                                    teclas4 = 2;
+                                    break;
 
+                                    case ALLEGRO_KEY_3:
+                                    teclas4 = 3;
+                                    break;
 
+                                    case ALLEGRO_KEY_4:
+                                    teclas4 = 4;
+                                    break;
 
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas4 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(dd5, 0, 0, 0);
+                        al_flip_display();
 
-
-                      sair=true;
-
+                        if(teclas4==1)
+                        {
+                            v=5;
+                            goto car;
+                        }
+                        else if(teclas4==2 || teclas4 ==3 || teclas4==4)
+                        {
+                            goto menu;
                         }
 
+                        }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
+                        
+                        
+                        sair = true;
+                         
+                        }
 
-                        else
 
                       if(tecla_jogo == 3)
                     {
-
                         al_rest(0.07);
-                    
-
 
                         mec = al_load_bitmap("mec1_RESPOSTA1.png");
                         mec2 = al_load_bitmap("mec2_RESPOSTA1.png");
@@ -1650,7 +1696,7 @@ int main()
                         mec5 = al_load_bitmap("mec5_RESPOSTA2.png");
                         mec6 = al_load_bitmap("mec6_RESPOSTA1.png");
                         mec7 = al_load_bitmap("mec7_RESPOSTA4.png");
-                        mec8 = al_load_bitmap("mec9_RESPOSTA1.png");
+                        /*mec8 = al_load_bitmap("mec9_RESPOSTA1.png");
                         mec9 = al_load_bitmap("mec10_RESPOSTA4.png");
                         mec10 = al_load_bitmap("mec11_RESPOSTA3.png");
                         mec11 = al_load_bitmap("mec12_RESPOSTA4.png");
@@ -1663,223 +1709,279 @@ int main()
                         mec18 = al_load_bitmap("mec20_RESPOSTA1.png");
                         mec19 = al_load_bitmap("mec21_RESPOSTA1.png");
                         mec20 = al_load_bitmap("mec22_RESPOSTA4.png");
-                        mec21 = al_load_bitmap("mec23_RESPOSTA2.png");
+                        mec21 = al_load_bitmap("mec23_RESPOSTA2.png");*/
 
+                        do{
 
-
-                        //Primeira pergunta a ser exibida
-
-                         for(i=0; i<1; i++)
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            n = rand() % 2;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(n == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(mec, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas = 5;
+                                    break;
+                                }
                             }
-                            else if(n == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(mec2, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(n == 2)
-                            {
-                                al_draw_bitmap(mec3, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                           
-                    }
+                        }
+                        al_draw_bitmap(mec, 0, 0, 0);
+                        al_flip_display();
 
-
-                    //Segunda pergunta a ser exibida
-
-                    for(i=0; i<1; i++)
+                        if(teclas==1)
                         {
-                            srand((unsigned)time(NULL));
-                            m = rand() % 2;
-
-                            if(m == 0)
-                            {
-                                al_draw_bitmap(mec4, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 1)
-                            {
-                                al_draw_bitmap(mec5, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 2)
-                            {
-                                al_draw_bitmap(mec6, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                           
-                    }
-
-
-
-                    //Terceira pergunta a ser exibida
-
-
-                    for(i=0; i<1; i++)
+                            goto segunda;
+                        }
+                        else if(teclas==2 || teclas ==3 || teclas==4)
                         {
-                            srand((unsigned)time(NULL));
-                            o = rand() % 2;
+                            return 0;
+                        }
 
-                            if(o == 0)
-                            {
-                                al_draw_bitmap(mec7, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 1)
-                            {
-                                al_draw_bitmap(mec8, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 2)
-                            {
-                                al_draw_bitmap(mec9, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                           
-                    }
+                        }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
 
-                    //Quarta pergunta a ser exibida
-
-                    for(i=0; i<1; i++)
+                                                            
+                        segunda:
+                        do{
+                                                               
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            p = rand() % 2;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(p == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(mec10, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas1 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas1 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas1 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas1 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas1 = 5;
+                                    break;
+                                }
                             }
-                            else if(p == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(mec11, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(p == 2)
-                            {
-                                al_draw_bitmap(mec12, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                           
-                    }
-
-
-
-                    //Quinta pergunta a ser exibida
-
-                    for(i=0; i<1; i++)
+                        }
+                        al_draw_bitmap(mec2, 0, 0, 0);
+                        al_flip_display();
+                               
+                        if(teclas1==1)
                         {
-                            srand((unsigned)time(NULL));
-                            q = rand() % 2;
-
-                            if(q == 0)
-                            {
-                                al_draw_bitmap(mec13, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 1)
-                            {
-                                al_draw_bitmap(mec14, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 2)
-                            {
-                                al_draw_bitmap(mec15, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                           
-                    }
-
-
-                    //Sexta pergunta a ser exibida
-                    for(i=0; i<1; i++)
+                            goto terceira;
+                        }
+                        else if(teclas1==2 || teclas1 ==3 || teclas1==4)
                         {
-                            srand((unsigned)time(NULL));
-                            r = rand() % 2;
+                            return 0;
+                        }
 
-                            if(r == 0)
-                            {
-                                al_draw_bitmap(mec16, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 1)
-                            {
-                                al_draw_bitmap(mec17, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 2)
-                            {
-                                al_draw_bitmap(mec18, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                           
-                    }
-
-
-
-                    //setima pergunta a ser exibida
-
-
-                    for(i=0; i<1; i++)
+                        }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
+                                
+                              
+                        terceira:
+                        do{
+                         
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            s = rand() % 2;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(s == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(mec19, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas2 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas2 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas2 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas2 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas2 = 5;
+                                    break;
+                                }
                             }
-                            else if(s == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(mec20, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(s == 2)
+                        }
+                        al_draw_bitmap(mec3, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas2==3)
+                        {
+                            goto quarta;
+                        }
+                        else if(teclas2==2 || teclas2 ==1 || teclas2==4)
+                        {
+                            return 0;
+                        }
+
+                        }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
+
+
+                        quarta:
+                        do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
+
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(mec21, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas3 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas3 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas3 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas3 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas3 = 5;
+                                    break;
+                                }
                             }
-                           
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(mec4, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas3==1)
+                        {
+                            goto quinta;
+                        }
+                        else if(teclas3==2 || teclas3 ==3 || teclas3==4)
+                        {
+                            v=4;
+                            return 0;
+                        }
+
+                        }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
+                                
+                          
+                        quinta:
+                        do{
+                                
+
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
+
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
+                            {
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas4 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas4 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas4 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas4 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas4 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(mec5, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas4==2)
+                        {
+                            v=5;
+                            goto car;
+                        }
+                        else if(teclas4==1 || teclas4 ==3 || teclas4==4)
+                        {
+                            return 0;
+                        }
+
+                        }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
+
+                        sair = true;
                     }
-
-                    sair=true;
-                }
-
-
-
-                      else
-
-                      if(tecla_jogo == 5)
+                               
+                         
+                    if(tecla_jogo == 5)
                     {
 
                         al_rest(0.07);
@@ -1928,344 +2030,275 @@ int main()
                          leg41 = al_load_bitmap("Legislação45_resposta2.png");
                          leg42 = al_load_bitmap("Legislação46_resposta2.png");
 
-                         //Primeira pergunta a ser exibida
+                        //Primeira pergunta a ser exibida
 
-                         for(i=0; i<1; i++)
+                         do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            n = rand() % 5;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(n == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(leg, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas = 5;
+                                    break;
+                                }
                             }
-                            else if(n == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(leg2, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(n == 2)
-                            {
-                                al_draw_bitmap(leg3, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(n==3)
-                            {
-                             al_draw_bitmap(leg4, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(n==4)
-                            {
-                             al_draw_bitmap(leg5, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
                         }
+                        al_draw_bitmap(leg, 0, 0, 0);
+                        al_flip_display();
 
-                         else if(n==5)
-                            {
-                             al_draw_bitmap(leg6, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-                    }
-
-                        //Segunda pergunta a ser exibida
-
-                         for(i=0; i<1; i++)
+                        if(teclas==1)
                         {
-                            srand((unsigned)time(NULL));
-                            m = rand() % 5;
-
-                            if(m == 0)
-                            {
-                                al_draw_bitmap(leg7, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 1)
-                            {
-                                al_draw_bitmap(leg8, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 2)
-                            {
-                                al_draw_bitmap(leg9, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m==3)
-                            {
-                             al_draw_bitmap(leg10, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(m==4)
-                            {
-                             al_draw_bitmap(leg11, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                            goto segunda_leg;
                         }
-
-                         else if(m==5)
-                            {
-                             al_draw_bitmap(leg12, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-
-                    }
-
-                        //Terceira imagem
-
-                         for(i=0; i<1; i++)
+                        else if(teclas==2 || teclas ==3 || teclas==4)
                         {
-                            srand((unsigned)time(NULL));
-                            o = rand() % 5;
-
-                            if(o == 0)
-                            {
-                                al_draw_bitmap(leg13, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 1)
-                            {
-                                al_draw_bitmap(leg14, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 2)
-                            {
-                                al_draw_bitmap(leg15, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o ==3)
-                            {
-                             al_draw_bitmap(leg16, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(o ==4)
-                            {
-                             al_draw_bitmap(leg17, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                            return 0;
                         }
 
-                         else if(o == 5)
-                            {
-                             al_draw_bitmap(leg18, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
+                        }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
 
-                    }
-
-
-
-
-
-                        //Quarta pergunta a ser exibida
-                         for(i=0; i<1; i++)
+                                                            
+                        segunda_leg:
+                        do{
+                                                               
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            p = rand() % 5;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(p == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(leg19, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas1 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas1 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas1 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas1 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas1 = 5;
+                                    break;
+                                }
                             }
-                            else if(p == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(leg20, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(p == 2)
-                            {
-                                al_draw_bitmap(leg21, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(p ==3)
-                            {
-                             al_draw_bitmap(leg22, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(p ==4)
-                            {
-                             al_draw_bitmap(leg23, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
                         }
-
-                         else if(p == 5)
-                            {
-                             al_draw_bitmap(leg24, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-
-                    }
-
-                    //Quinta pergunta a ser exibida
-                    for(i=0; i<1; i++)
+                        al_draw_bitmap(leg2, 0, 0, 0);
+                        al_flip_display();
+                               
+                        if(teclas1==3)
                         {
-                            srand((unsigned)time(NULL));
-                            q = rand() % 5;
-
-                            if(q == 0)
-                            {
-                                al_draw_bitmap(leg25, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 1)
-                            {
-                                al_draw_bitmap(leg26, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 2)
-                            {
-                                al_draw_bitmap(leg27, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q ==3)
-                            {
-                             al_draw_bitmap(leg28, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(q ==4)
-                            {
-                             al_draw_bitmap(leg29, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                            goto terceira_leg;
                         }
-
-                         else if(q == 5)
-                            {
-                             al_draw_bitmap(leg30, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-
-                    }
-
-                    //Sexta pergunta a ser exibida
-
-                    for(i=0; i<1; i++)
+                        else if(teclas1==2 || teclas1 ==1 || teclas1==4)
                         {
-                            srand((unsigned)time(NULL));
-                            r = rand() % 5;
-
-                            if(r == 0)
-                            {
-                                al_draw_bitmap(leg31, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 1)
-                            {
-                                al_draw_bitmap(leg32, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 2)
-                            {
-                                al_draw_bitmap(leg33, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r ==3)
-                            {
-                             al_draw_bitmap(leg34, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(r ==4)
-                            {
-                             al_draw_bitmap(leg35, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                            return 0;
                         }
 
-                         else if(r == 5)
-                            {
-                             al_draw_bitmap(leg36, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
-                        }
-
-                    }
-
-                    //setima pergunta a ser exibida
-
-
-                    for(i=0; i<1; i++)
+                        }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
+                                
+                              
+                        terceira_leg:
+                        do{
+                         
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            s = rand() % 5;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(s == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(leg37, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas2 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas2 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas2 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas2 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas2 = 5;
+                                    break;
+                                }
                             }
-                            else if(s == 1)
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
                             {
-                                al_draw_bitmap(leg38, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
+                                sair = true;
                             }
-                            else if(s == 2)
-                            {
-                                al_draw_bitmap(leg39, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(s ==3)
-                            {
-                             al_draw_bitmap(leg40, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);   
-                            }
-                            else if(s ==4)
-                            {
-                             al_draw_bitmap(leg41, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                        }
+                        al_draw_bitmap(leg3, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas2==1)
+                        {
+                            goto quarta_leg;
+                        }
+                        else if(teclas2==2 || teclas2 ==3 || teclas2==4)
+                        {
+                            return 0;
                         }
 
-                         else if(s == 5)
+                        }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
+
+
+                        quarta_leg:
+                        do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
+
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                             al_draw_bitmap(leg42, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);  
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas3 = 1;
+                                    break;
+
+                                    case ALLEGRO_KEY_2:
+                                    teclas3 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas3 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas3 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas3 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(leg4, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas3==2)
+                        {
+                            goto quinta_leg;
+                        }
+                        else if(teclas3==1 || teclas3 ==3 || teclas3==4)
+                        {
+                            v=4;
+                            return 0;
                         }
 
+                        }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
+                                
+                          
+                        quinta_leg:
+                        do{
+                                
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
+                            {
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas4 = 1;
+                                    break;
 
-                    }
+                                    case ALLEGRO_KEY_2:
+                                    teclas4 = 2;
+                                    break;
 
-                        sair=true;
-                    }
+                                    case ALLEGRO_KEY_3:
+                                    teclas4 = 3;
+                                    break;
 
+                                    case ALLEGRO_KEY_4:
+                                    teclas4 = 4;
+                                    break;
 
-                    else
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas4 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(leg5, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas4==1)
+                        {
+                            v=5;
+                            goto car;
+                        }
+                        else if(teclas4==2 || teclas4 ==3 || teclas4==4)
+                        {
+                            return 0;
+                        }
+
+                        }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
+                        
+                        sair = true;
+                    }                        
 
                       if(tecla_jogo == 6)
                     {
@@ -2287,169 +2320,280 @@ int main()
                         meio13 = al_load_bitmap("meioamb15_RESPOSTA1.png");
                         meio14 = al_load_bitmap("meioamb16_RESPOSTA3.png");
 
-                         for(i=0; i<1; i++)
+                        do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            n = rand() % 1;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(n == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(meio, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(n == 1)
-                            {
-                                al_draw_bitmap(meio2, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas = 1;
+                                    break;
 
+                                    case ALLEGRO_KEY_2:
+                                    teclas = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(meio, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas==2)
+                        {
+                            goto segunda_me;
+                        }
+                        else if(teclas==1 || teclas ==3 || teclas==4)
+                        {
+                            teclas = 0;
+                            al_flip_display();
+                            return 0;
                         }
 
-                         //Segunda pergunta a ser exibida
+                        }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
 
-                         for(i=0; i<1; i++)
+                                                            
+                        segunda_me:
+                        do{
+                                                               
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            m = rand() % 1;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(m == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(meio3, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(m == 1)
-                            {
-                                al_draw_bitmap(meio4, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas1 = 1;
+                                    break;
 
+                                    case ALLEGRO_KEY_2:
+                                    teclas1 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas1 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas1 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas1 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(meio2, 0, 0, 0);
+                        al_flip_display();
+                               
+                        if(teclas1==2)
+                        {
+                            goto terceira_me;
+                        }
+                        else if(teclas1==1 || teclas1 ==3 || teclas1==4)
+                        {
+                            return 0;
                         }
 
-                        //Terceira pergunta a ser exibida
-
-
-                         for(i=0; i<1; i++)
+                        }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
+                                
+                              
+                        terceira_me:
+                        do{
+                         
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            o = rand() % 1;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(o == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(meio5, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(o == 1)
-                            {
-                                al_draw_bitmap(meio6, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas2 = 1;
+                                    break;
 
+                                    case ALLEGRO_KEY_2:
+                                    teclas2 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas2 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas2 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas2 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(meio3, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas2==1)
+                        {
+                            goto quarta_me;
+                        }
+                        else if(teclas2==2 || teclas2 ==3 || teclas2==4)
+                        {
+                            return 0;
                         }
 
+                        }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
 
-                         //Quarta pergunta a ser exibida
 
-                         for(i=0; i<1; i++)
+                        quarta_me:
+                        do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            p = rand() % 1;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(p == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(meio7, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(p == 1)
-                            {
-                                al_draw_bitmap(meio8, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas3 = 1;
+                                    break;
 
+                                    case ALLEGRO_KEY_2:
+                                    teclas3 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas3 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas3 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas3 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(meio4, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas3==4)
+                        {
+                            goto quinta_me;
+                        }
+                        else if(teclas3==2 || teclas3 ==3 || teclas3==4)
+                        {
+                            v=4;
+                            goto car2;
                         }
 
-
-                        //Quinta pergunta a ser exibida
-
-
-                         for(i=0; i<1; i++)
+                        }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
+                                
+                          
+                        quinta_me:
+                        do{
+                                
+                        while(!al_is_event_queue_empty(fila_eventos))
                         {
-                            srand((unsigned)time(NULL));
-                            q = rand() % 1;
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
 
-                            if(q == 0)
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
                             {
-                                al_draw_bitmap(meio9, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(q == 1)
-                            {
-                                al_draw_bitmap(meio10, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_1:
+                                    teclas4 = 1;
+                                    break;
 
+                                    case ALLEGRO_KEY_2:
+                                    teclas4 = 2;
+                                    break;
+
+                                    case ALLEGRO_KEY_3:
+                                    teclas4 = 3;
+                                    break;
+
+                                    case ALLEGRO_KEY_4:
+                                    teclas4 = 4;
+                                    break;
+
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas4 = 5;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+                        al_draw_bitmap(meio5, 0, 0, 0);
+                        al_flip_display();
+
+                        if(teclas4==4)
+                        {
+                            v=5;
+                            goto car;
+                        }
+                        else if(teclas4==1 || teclas4 ==3 || teclas4==2)
+                        {
+                            return 0;
                         }
 
-                        //Sexta pergunta a ser exibida
-
-
-                         for(i=0; i<1; i++)
-                        {
-                            srand((unsigned)time(NULL));
-                            r = rand() % 1;
-
-                            if(r == 0)
-                            {
-                                al_draw_bitmap(meio11, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(r == 1)
-                            {
-                                al_draw_bitmap(meio12, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-
-                        }
-
-                        //Setima pergunta a ser exibida
-
-
-                         for(i=0; i<1; i++)
-                        {
-                            srand((unsigned)time(NULL));
-                            s = rand() % 1;
-
-                            if(n == 0)
-                            {
-                                al_draw_bitmap(meio13, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-                            else if(s == 1)
-                            {
-                                al_draw_bitmap(meio14, 0, 0, 0);
-                                al_flip_display();
-                                al_rest(02.0);
-                            }
-
-                        }
-
-                        sair=true;
+                        }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
+                        
+                        
+                        sair = true;
                     }
 
 
-                    else if(tecla_jogo==7){
+                    else if(tecla_jogo==7)
+                    {
                         al_rest(0.07);
 
                         como = al_load_bitmap("como jogar.jpg");
@@ -2457,27 +2601,41 @@ int main()
                         al_draw_bitmap(como, 0,0,0);
                         
                         al_flip_display();
-                        al_rest(05.0);
                         tecla_jogo=0;
-                        goto menu;
-                        al_flip_display();
+                        do{
+
+                        while(!al_is_event_queue_empty(fila_eventos))
+                        {
+                            ALLEGRO_EVENT jogar;
+                            al_wait_for_event(fila_eventos, &jogar);
+
+                            if(jogar.type == ALLEGRO_EVENT_KEY_DOWN)
+                            {
+                                switch(jogar.keyboard.keycode)
+                                {
+                                    case ALLEGRO_KEY_ESCAPE:
+                                    teclas_vol = 1;
+                                    break;
+                                }
+                            }
+                            else if(jogar.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+                            {
+                                sair = true;
+                            }
+                        }
+
+                        if(teclas_vol==1)
+                        {
+                            teclas_vol = 0;
+                            goto voltar;
+                            al_flip_display();
+                        }
+                        }while(teclas_vol != 1);
                     }
-
-
-
-
-
-
-
-                
-
-
                 } 
-
-
             }
         }
-    }
+    
             
     al_destroy_display(janela);
     al_destroy_event_queue(fila_eventos);
@@ -2527,13 +2685,13 @@ bool menu()
         return false;
     }
 
-     //sample = al_load_sample("errado.ogg");
-    /*if (!sample)
+     sample = al_load_sample("errado.ogg");
+    if (!sample)
     {
         fprintf(stderr, "Falha ao carregar sample.\n");
         al_destroy_display(janela);
         return false;
-    }*/
+    }
  
     if (!al_install_keyboard())
     {
@@ -2574,7 +2732,7 @@ bool menu()
     {
         fprintf(stderr, "Falha ao criar fila de eventos.\n");
         al_destroy_display(janela);
-          al_destroy_sample(sample);
+        al_destroy_sample(sample);
         return false;
     }
 
@@ -2590,7 +2748,7 @@ bool menu()
     }
     
     //Carregando imagem de fundo do menu inicial 
-    fundo = al_load_bitmap("men.png");
+    fundo = al_load_bitmap("men.jpg");
     if (!fundo)
     {
         fprintf(stderr, "Falha ao carregar imagem de fundo.\n");
