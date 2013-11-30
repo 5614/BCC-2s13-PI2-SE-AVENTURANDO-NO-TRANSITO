@@ -76,7 +76,7 @@ ALLEGRO_BITMAP *mec4 = NULL;
 ALLEGRO_BITMAP *mec5 = NULL;
 ALLEGRO_BITMAP *mec6 = NULL;
 ALLEGRO_BITMAP *mec7 = NULL;
-/*ALLEGRO_BITMAP *mec8 = NULL;
+ALLEGRO_BITMAP *mec8 = NULL;
 ALLEGRO_BITMAP *mec9 = NULL;
 ALLEGRO_BITMAP *mec10 = NULL;
 ALLEGRO_BITMAP *mec11 = NULL;
@@ -89,7 +89,7 @@ ALLEGRO_BITMAP *mec17 = NULL;
 ALLEGRO_BITMAP *mec18 = NULL;
 ALLEGRO_BITMAP *mec19 = NULL;
 ALLEGRO_BITMAP *mec20 = NULL;
-ALLEGRO_BITMAP *mec21 = NULL;*/
+ALLEGRO_BITMAP *mec21 = NULL;
 
 
 
@@ -249,7 +249,7 @@ void tema(int tecla)
     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 100, ALLEGRO_ALIGN_RIGHT, "4-Direção Defensiva"); 
     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-80, 200, ALLEGRO_ALIGN_RIGHT, "-5-Legislação");         
     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 300, ALLEGRO_ALIGN_RIGHT, "6-Meio Ambiente"); 
-     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 400, ALLEGRO_ALIGN_RIGHT, "7-Tutorial"); 
+    al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 400, ALLEGRO_ALIGN_RIGHT, "7-Tutorial"); 
 
 
     //Quando o usuario escolher um o tema, aparecera um apenas o tema de sua escolha com a tela branca
@@ -405,12 +405,14 @@ int main()
             if(tecla==5)
             {         tecla = 0;
                 //Imagens dinamicas que serao exibidas para
-                //o entendimento da historia do jogo
-              
-                //primeira imagem a ser exibida 
+                //o entendimento da historia do jogo 
+
+                //Musica da historinha do jogo
 
                 al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
                 al_set_audio_stream_playing(musica, true); 
+
+                //primeira imagem a ser exibida
 
                 imagem = al_load_bitmap("01.png");
                 if(!imagem)
@@ -452,6 +454,7 @@ int main()
                 }
                 if(tecla_h == 1)
                 {
+                    al_destroy_bitmap(imagem);
                     goto pula;
                 }
                 }while(tecla_h != 1);
@@ -496,6 +499,7 @@ int main()
                 }
                 if(tecla_i == 1)
                 {
+                    al_destroy_bitmap(imagem);
                     goto pula_segunda;
                 }
                 }while(tecla_i != 1);
@@ -540,6 +544,7 @@ int main()
                 }
                 if(tecla_j == 1)
                 {
+                    al_destroy_bitmap(imagem);
                     goto pula_terceira;
                 }
                 }while(tecla_j != 1);
@@ -578,6 +583,7 @@ int main()
                 }
                 if(tecla_k == 1)
                 {
+                    al_destroy_bitmap(imagem);
                     goto pula_quarta;
                 }
                 }while(tecla_k != 1);
@@ -622,12 +628,17 @@ int main()
                 }
                 if(tecla_l == 1)
                 {
+                    al_destroy_bitmap(imagem);
                     goto pula_quinta;
                 }
                 }while(tecla_l != 1);
 
                 car2:
                 if(v==4){
+                al_clear_to_color(al_map_rgb(255, 0, 255));
+                al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ERROU!!!");
+                al_flip_display();
+                al_rest(02.0);
                 imagem = al_load_bitmap("segundo.jpg");
                 if(!imagem)
                 {
@@ -641,32 +652,42 @@ int main()
                 al_flip_display();
 
                 al_rest(03.0);
-                return 0;
-              }
 
-              car: 
-               if(v==5){             
-                imagem = al_load_bitmap("primeiro.jpg");
-                if(!imagem)
-                {
-                    fprintf(stderr, "Falha ao carregar imagem do primeiro carro.\n");
-                    al_destroy_display(janela);
-                    return -1;
+                return 0;
+            }
+
+            car: 
+            if(v==5)
+               {             
+                    imagem = al_load_bitmap("primeiro.jpg");
+                    if(!imagem)
+                    {
+                        fprintf(stderr, "Falha ao carregar imagem do primeiro carro.\n");
+                        al_destroy_display(janela);
+                        return -1;
+                    }
+
+                    al_draw_bitmap(imagem, 0, 0, 0);
+
+                    al_flip_display();
+
+                    al_rest(04.0);
+                    return 0;
                 }
-
-                al_draw_bitmap(imagem, 0, 0, 0);
-
-                al_flip_display();
-
-                al_rest(04.0);
-                return 0;
-              }
-          }
+            }
                 pula_quinta:
                 //looping para funcionar o segundo menu do jogo
                 al_destroy_audio_stream(musica);
-                voltar:
                 menu:
+                if(v==1)
+                {
+                    al_clear_to_color(al_map_rgb(255, 0, 255));
+                    al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ERROU!!!");
+                    al_flip_display();
+                    al_rest(02.0);
+                    return 0;
+                }
+                voltar:
                 al_flip_display();
                 while(!sair)
                 {
@@ -678,7 +699,7 @@ int main()
                     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 100, ALLEGRO_ALIGN_RIGHT, "4-Direção Defensiva"); 
                     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-80, 200, ALLEGRO_ALIGN_RIGHT, "-5-Legislação");         
                     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 300, ALLEGRO_ALIGN_RIGHT, "6-Meio Ambiente");
-                     al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 400, ALLEGRO_ALIGN_RIGHT, "7-Tutorial");  
+                    al_draw_text(fonte, al_map_rgb(0, 0, 0), LARGURA_TELA-10, 400, ALLEGRO_ALIGN_RIGHT, "7-Tutorial");  
 
                     al_flip_display();
 
@@ -741,7 +762,6 @@ int main()
                         al_destroy_font(fonte);
                         al_rest(00.7);
 
-
                         //Aqui ira iniciar o jogo caso o usuario escolha o tema primeiros socorros
                         //o loop funcionara escolhendo 1 pergunta por etapa, para cada etapa terá um certo numero
                         //de perguntas para escolher aleatoriamente, que no caso aqui sao 3 perguntas, e apenas 1 sera a escolhida
@@ -752,7 +772,7 @@ int main()
                         jogo4 = al_load_bitmap("ps4_RESPOSTA2.png");                    
                         jogo5 = al_load_bitmap("ps5_RESPOSTA2.png");
                         jogo6 = al_load_bitmap("ps6_RESPOSTA1.png");
-                        jogo7 = al_load_bitmap("ps7_RESPOSTA4.png");
+                        /*jogo7 = al_load_bitmap("ps7_RESPOSTA4.png");
                         jogo8 = al_load_bitmap("ps8_RESPOSTA3.png");
                         jogo9 = al_load_bitmap("ps9_RESPOSTA3.png");
                         jogo10 = al_load_bitmap("ps10_RESPOSTA1.png");                    
@@ -778,7 +798,7 @@ int main()
                         jogo30 = al_load_bitmap("ps30_RESPOSTA1.png");
                         jogo31 = al_load_bitmap("ps32_RESPOSTA3.png");
                         jogo32 = al_load_bitmap("ps33_RESPOSTA3.png");
-                        jogo33 = al_load_bitmap("ps34_RESPOSTA3.png");
+                        jogo33 = al_load_bitmap("ps34_RESPOSTA3.png");*/
 
                         //PRIMEIRA PERGUNTA A SER EXIBIDA (etapa 1)
                         do{
@@ -823,17 +843,21 @@ int main()
 
                         if(teclas==1)
                         {
+                            al_destroy_bitmap(jogo);
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto segunda_ps;
                         }
                         else if(teclas==2 || teclas ==3 || teclas==4)
                         {
-                            teclas = 0;
                             al_destroy_bitmap(jogo);
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
-
                                                             
                         segunda_ps:
                         do{
@@ -878,11 +902,18 @@ int main()
                                
                         if(teclas1==2)
                         {
+                            al_destroy_bitmap(jogo3);
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto terceira_ps;
                         }
                         else if(teclas1==1 || teclas1 ==3 || teclas1==4)
                         {
-                            return 0;
+                            al_destroy_bitmap(jogo3);
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
@@ -931,11 +962,18 @@ int main()
 
                         if(teclas2==2)
                         {
+                            al_destroy_bitmap(jogo4);
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quarta_ps;
                         }
                         else if(teclas2==3 || teclas2 ==1 || teclas2==4)
                         {
-                            return 0;
+                            al_destroy_bitmap(jogo4);
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
@@ -984,12 +1022,18 @@ int main()
 
                         if(teclas3==2)
                         {
+                            al_destroy_bitmap(jogo5);
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quinta_ps;
                         }
                         else if(teclas3==1 || teclas3 ==3 || teclas3==4)
                         {
-                            v=4;
-                            goto car2;
+                            al_destroy_bitmap(jogo5);
+                            v = 1;
+                            goto menu; 
                         }
 
                         }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
@@ -1039,12 +1083,19 @@ int main()
 
                         if(teclas4==1)
                         {
+                            al_destroy_bitmap(jogo6);
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             v=5;
                             goto car;
                         }
                         else if(teclas4==2 || teclas4 ==3 || teclas4==4)
                         {
-                            return 0;
+                            al_destroy_bitmap(jogo6);
+                            v = 4;
+                            goto car2;
                         }
 
                         }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
@@ -1062,34 +1113,34 @@ int main()
 
                             al_rest(0.07);
 
-                         sinal = al_load_bitmap("sinal1_RESPOSTA2.png");
-                          sinal2 = al_load_bitmap("sinal2_RESPOSTA3.png");
-                          sinal3 = al_load_bitmap("sinal3_RESPOSTA3.png");
-                          sinal4 = al_load_bitmap("sinal4_RESPOSTA2.png");
-                          sinal5 = al_load_bitmap("sinal5_RESPOSTA1.png");
-                          sinal6 = al_load_bitmap("perg_placa_3 - resp. 4.png");
-                          sinal7 = al_load_bitmap("sinal7_RESPOSTA1.png");
-                          sinal8 = al_load_bitmap("perg_placa_4 - resp. 3.png");
-                          sinal9 = al_load_bitmap("sinal9_RESPOSTA2.png");
-                          sinal10 = al_load_bitmap("perg_placa_5 - resp. 3.png");
-                          sinal11 = al_load_bitmap("sinal11_RESPOSTA2.png");
-                          sinal12 = al_load_bitmap("sinal12_RESPOSTA4.png");
-                          sinal13 = al_load_bitmap("sinal13_RESPOSTA2.png");
-                          sinal14 = al_load_bitmap("perg_placa_6 - resp. 4.png");
-                          sinal15 = al_load_bitmap("sinal15_RESPOSTA2.png");
-                          sinal16 = al_load_bitmap("sinal16_RESPOSTA3.png");
-                          sinal17 = al_load_bitmap("sinal17_RESPOSTA4.png");
-                          sinal18 = al_load_bitmap("perg_placa_7 - resp. 1.png");
-                          sinal19 = al_load_bitmap("perg_placa_8 - resp. 3.png");
-                          sinal20 = al_load_bitmap("perg_placa_9 - resp. 3.png");
-                          sinal21 = al_load_bitmap("perg_placa_10 - resp.3.png");
-                          sinal22 = al_load_bitmap("perg_placa_11 - resp. 2.png");
-                          sinal23 = al_load_bitmap("sinal2_RESPOSTA3.png");
-                          sinal24 = al_load_bitmap("sinal4_RESPOSTA2.png");
-                          sinal25 = al_load_bitmap("sinal6_RESPOSTA3.png");
-                          sinal26 = al_load_bitmap("sinal8_RESPOSTA2.png");
-                          sinal27 = al_load_bitmap("sinal10_RESPOSTA3.png");
-                          sinal28 = al_load_bitmap("sinal14_RESPOSTA2.png");
+                        sinal = al_load_bitmap("sinal1_RESPOSTA2.png");
+                        sinal2 = al_load_bitmap("sinal2_RESPOSTA3.png");
+                        sinal3 = al_load_bitmap("sinal3_RESPOSTA3.png");
+                        sinal4 = al_load_bitmap("sinal4_RESPOSTA2.png");
+                        sinal5 = al_load_bitmap("sinal5_RESPOSTA1.png");
+                        sinal6 = al_load_bitmap("perg_placa_3 - resp. 4.png");
+                        sinal7 = al_load_bitmap("sinal7_RESPOSTA1.png");
+                        sinal8 = al_load_bitmap("perg_placa_4 - resp. 3.png");
+                        sinal9 = al_load_bitmap("sinal9_RESPOSTA2.png");
+                        sinal10 = al_load_bitmap("perg_placa_5 - resp. 3.png");
+                        sinal11 = al_load_bitmap("sinal11_RESPOSTA2.png");
+                        sinal12 = al_load_bitmap("sinal12_RESPOSTA4.png");
+                        sinal13 = al_load_bitmap("sinal13_RESPOSTA2.png");
+                        sinal14 = al_load_bitmap("perg_placa_6 - resp. 4.png");
+                        sinal15 = al_load_bitmap("sinal15_RESPOSTA2.png");
+                        sinal16 = al_load_bitmap("sinal16_RESPOSTA3.png");
+                        sinal17 = al_load_bitmap("sinal17_RESPOSTA4.png");
+                        sinal18 = al_load_bitmap("perg_placa_7 - resp. 1.png");
+                        sinal19 = al_load_bitmap("perg_placa_8 - resp. 3.png");
+                        sinal20 = al_load_bitmap("perg_placa_9 - resp. 3.png");
+                        sinal21 = al_load_bitmap("perg_placa_10 - resp.3.png");
+                        sinal22 = al_load_bitmap("perg_placa_11 - resp. 2.png");
+                        sinal23 = al_load_bitmap("sinal2_RESPOSTA3.png");
+                        sinal24 = al_load_bitmap("sinal4_RESPOSTA2.png");
+                        sinal25 = al_load_bitmap("sinal6_RESPOSTA3.png");
+                        sinal26 = al_load_bitmap("sinal8_RESPOSTA2.png");
+                        sinal27 = al_load_bitmap("sinal10_RESPOSTA3.png");
+                        sinal28 = al_load_bitmap("sinal14_RESPOSTA2.png");
 
 
                          //Primeira pergunta a ser exibida
@@ -1136,11 +1187,16 @@ int main()
 
                         if(teclas==2)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto segunda_si;
                         }
                         else if(teclas==1 || teclas ==3 || teclas==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
@@ -1189,11 +1245,16 @@ int main()
                                
                         if(teclas1==3)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto terceira_si;
                         }
                         else if(teclas1==2 || teclas1 ==1 || teclas1==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
@@ -1242,11 +1303,16 @@ int main()
 
                         if(teclas2==3)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quarta_si;
                         }
                         else if(teclas2==2 || teclas2 ==1 || teclas2==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
@@ -1295,12 +1361,16 @@ int main()
 
                         if(teclas3==2)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quinta_si;
                         }
                         else if(teclas3==1 || teclas3 ==3 || teclas3==4)
                         {
-                            v=4;
-                            goto car2;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
@@ -1349,12 +1419,17 @@ int main()
 
                         if(teclas4==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             v=5;
                             goto car;
                         }
                         else if(teclas4==2 || teclas4 ==3 || teclas4==4)
                         {
-                            goto menu;
+                            v = 4;
+                            goto car2;
                         }
 
                         }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
@@ -1456,11 +1531,16 @@ int main()
 
                         if(teclas==4)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto segunda_dd;
                         }
                         else if(teclas==2 || teclas ==3 || teclas==1)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
@@ -1509,11 +1589,16 @@ int main()
                                
                         if(teclas1==2)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto terceira_dd;
                         }
                         else if(teclas1==1 || teclas1 ==3 || teclas1==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
@@ -1562,11 +1647,16 @@ int main()
 
                         if(teclas2==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quarta_dd;
                         }
                         else if(teclas2==2 || teclas2 ==3 || teclas2==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
@@ -1615,12 +1705,16 @@ int main()
 
                         if(teclas3==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quinta_dd;
                         }
                         else if(teclas3==2 || teclas3 ==3 || teclas3==4)
                         {
-                            v=4;
-                            goto car2;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
@@ -1669,12 +1763,17 @@ int main()
 
                         if(teclas4==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             v=5;
                             goto car;
                         }
                         else if(teclas4==2 || teclas4 ==3 || teclas4==4)
                         {
-                            goto menu;
+                            v = 4;
+                            goto car2;
                         }
 
                         }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
@@ -1696,7 +1795,7 @@ int main()
                         mec5 = al_load_bitmap("mec5_RESPOSTA2.png");
                         mec6 = al_load_bitmap("mec6_RESPOSTA1.png");
                         mec7 = al_load_bitmap("mec7_RESPOSTA4.png");
-                        /*mec8 = al_load_bitmap("mec9_RESPOSTA1.png");
+                        mec8 = al_load_bitmap("mec9_RESPOSTA1.png");
                         mec9 = al_load_bitmap("mec10_RESPOSTA4.png");
                         mec10 = al_load_bitmap("mec11_RESPOSTA3.png");
                         mec11 = al_load_bitmap("mec12_RESPOSTA4.png");
@@ -1709,7 +1808,7 @@ int main()
                         mec18 = al_load_bitmap("mec20_RESPOSTA1.png");
                         mec19 = al_load_bitmap("mec21_RESPOSTA1.png");
                         mec20 = al_load_bitmap("mec22_RESPOSTA4.png");
-                        mec21 = al_load_bitmap("mec23_RESPOSTA2.png");*/
+                        mec21 = al_load_bitmap("mec23_RESPOSTA2.png");
 
                         do{
 
@@ -1753,11 +1852,16 @@ int main()
 
                         if(teclas==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto segunda;
                         }
                         else if(teclas==2 || teclas ==3 || teclas==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
@@ -1806,11 +1910,16 @@ int main()
                                
                         if(teclas1==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto terceira;
                         }
                         else if(teclas1==2 || teclas1 ==3 || teclas1==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
@@ -1859,11 +1968,16 @@ int main()
 
                         if(teclas2==3)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quarta;
                         }
                         else if(teclas2==2 || teclas2 ==1 || teclas2==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
@@ -1912,12 +2026,16 @@ int main()
 
                         if(teclas3==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quinta;
                         }
                         else if(teclas3==2 || teclas3 ==3 || teclas3==4)
                         {
-                            v=4;
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
@@ -1967,12 +2085,17 @@ int main()
 
                         if(teclas4==2)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             v=5;
                             goto car;
                         }
                         else if(teclas4==1 || teclas4 ==3 || teclas4==4)
                         {
-                            return 0;
+                            v = 4;
+                            goto car2;
                         }
 
                         }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
@@ -2074,11 +2197,16 @@ int main()
 
                         if(teclas==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto segunda_leg;
                         }
                         else if(teclas==2 || teclas ==3 || teclas==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
@@ -2127,11 +2255,16 @@ int main()
                                
                         if(teclas1==3)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto terceira_leg;
                         }
                         else if(teclas1==2 || teclas1 ==1 || teclas1==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
@@ -2180,11 +2313,16 @@ int main()
 
                         if(teclas2==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quarta_leg;
                         }
                         else if(teclas2==2 || teclas2 ==3 || teclas2==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
@@ -2233,12 +2371,16 @@ int main()
 
                         if(teclas3==2)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quinta_leg;
                         }
                         else if(teclas3==1 || teclas3 ==3 || teclas3==4)
                         {
-                            v=4;
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
@@ -2287,12 +2429,17 @@ int main()
 
                         if(teclas4==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             v=5;
                             goto car;
                         }
                         else if(teclas4==2 || teclas4 ==3 || teclas4==4)
                         {
-                            return 0;
+                            v = 4;
+                            goto car2;
                         }
 
                         }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
@@ -2362,13 +2509,16 @@ int main()
 
                         if(teclas==2)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto segunda_me;
                         }
                         else if(teclas==1 || teclas ==3 || teclas==4)
                         {
-                            teclas = 0;
-                            al_flip_display();
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas!=1 || teclas !=2 || teclas !=3 || teclas != 4);
@@ -2417,11 +2567,16 @@ int main()
                                
                         if(teclas1==2)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto terceira_me;
                         }
                         else if(teclas1==1 || teclas1 ==3 || teclas1==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas1!=1 || teclas1 !=2 || teclas1 !=3 || teclas1 != 4);
@@ -2470,11 +2625,16 @@ int main()
 
                         if(teclas2==1)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quarta_me;
                         }
                         else if(teclas2==2 || teclas2 ==3 || teclas2==4)
                         {
-                            return 0;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas2!=1 || teclas2 !=2 || teclas2 !=3 || teclas2 != 4);
@@ -2523,12 +2683,16 @@ int main()
 
                         if(teclas3==4)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             goto quinta_me;
                         }
                         else if(teclas3==2 || teclas3 ==3 || teclas3==4)
                         {
-                            v=4;
-                            goto car2;
+                            v = 1;
+                            goto menu;
                         }
 
                         }while(teclas3!=1 || teclas3 !=2 || teclas3 !=3 || teclas3 != 4);
@@ -2577,12 +2741,17 @@ int main()
 
                         if(teclas4==4)
                         {
+                            al_clear_to_color(al_map_rgb(255, 0, 255));
+                            al_draw_text(fonte_menu, al_map_rgb(0, 0, 0), LARGURA_TELA /2, 200, ALLEGRO_ALIGN_CENTRE, "ACERTOU!!!");
+                            al_flip_display();
+                            al_rest(02.0);
                             v=5;
                             goto car;
                         }
                         else if(teclas4==1 || teclas4 ==3 || teclas4==2)
                         {
-                            return 0;
+                            v = 4;
+                            goto car2;
                         }
 
                         }while(teclas4!=1 || teclas4 !=2 || teclas4 !=3 || teclas4 != 4);
@@ -2634,9 +2803,7 @@ int main()
                     }
                 } 
             }
-        }
-    
-            
+        }         
     al_destroy_display(janela);
     al_destroy_event_queue(fila_eventos);
     al_destroy_sample(sample);
